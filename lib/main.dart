@@ -40,108 +40,42 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
   final player = AudioPlayer();
+
+  Expanded buildKey(Color keyColor,int noteNumber){
+    return Expanded(
+      child: IconButton(
+        padding: EdgeInsets.all(0.0),
+        icon: Container(
+          color: keyColor,
+        ),
+        onPressed: () {
+          playSound(noteNumber);
+        },
+      ),
+    );
+  }
+
+  void playSound(var num) async {
+    await player.play(AssetSource("note$num.wav"));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Expanded(
-            child: IconButton(
-              padding: EdgeInsets.all(0.0),
-              icon: Container(
-                color: Colors.red,
-              ),
-              onPressed: () {
-                playSound("1");
-              },
-            ),
-          ),
-          Expanded(
-            child: IconButton(
-              padding: EdgeInsets.all(0.0),
-              icon: Container(
-                color: Colors.orange,
-              ),
-              onPressed: () {
-                // setState(() {
-                playSound("2");
-                // });
-              },
-            ),
-          ),
-          Expanded(
-            child: IconButton(
-              padding: EdgeInsets.all(0.0),
-              icon: Container(
-                color: Colors.yellow,
-              ),
-              onPressed: () {
-                // setState(() {
-                playSound("3");
-                // });
-              },
-            ),
-          ),
-          Expanded(
-            child: IconButton(
-              padding: EdgeInsets.all(0.0),
-              icon: Container(
-                color: Colors.green,
-              ),
-              onPressed: () {
-                // setState(() {
-                playSound("4");
-                // });
-              },
-            ),
-          ),
-          Expanded(
-            child: IconButton(
-              padding: EdgeInsets.all(0.0),
-              icon: Container(
-                color: Colors.teal,
-              ),
-              onPressed: () {
-                // setState(() {
-                playSound("5");
-                // });
-              },
-            ),
-          ),
-          Expanded(
-            child: IconButton(
-              padding: EdgeInsets.all(0.0),
-              icon: Container(
-                color: Colors.blue,
-              ),
-              onPressed: () {
-                // setState(() {
-                playSound("6");
-                // });
-              },
-            ),
-          ),
-          Expanded(
-            child: IconButton(
-              padding: EdgeInsets.all(0.0),
-              icon: Container(
-                color: Colors.purple,
-              ),
-              onPressed: () {
-                // setState(() {
-                playSound("7");
-                // });
-              },
-            ),
-          )
+          buildKey(Colors.red,1),
+          buildKey(Colors.orange,2),
+          buildKey(Colors.yellow,3),
+          buildKey(Colors.green,4),
+          buildKey(Colors.teal,5),
+          buildKey(Colors.blue,6),
+          buildKey(Colors.purple,7),
         ],
       ),
     );
-  }
-
-  Future<void> playSound(var num) async {
-    await player.play(AssetSource("note$num.wav"));
   }
 }
